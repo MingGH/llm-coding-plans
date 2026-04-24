@@ -49,10 +49,16 @@
   min-width: 0;
 }
 
-.plan-card-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
+.plan-card-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
   flex-shrink: 0;
 }
 

@@ -27,9 +27,11 @@ export default function PlanCard({
         <div className="plan-card-top">
           <div className="plan-card-identity">
             <div
-              className="plan-card-dot"
+              className="plan-card-avatar"
               style={{ background: plan.color }}
-            />
+            >
+              {plan.name.charAt(0)}
+            </div>
             <h3 className="plan-card-name">
               {plan.company} - {plan.name}
             </h3>

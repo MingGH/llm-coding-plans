@@ -5,15 +5,22 @@
 }
 
 .header-inner {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 6px;
 }
 
 .header-brand {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 6px;
 }
 
 .header-logo {
@@ -27,8 +34,46 @@
   letter-spacing: -0.3px;
 }
 
+.header-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: 13px;
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  transition: all 0.15s ease;
+}
+
+.header-link:hover {
+  color: var(--color-primary);
+  background: var(--color-border-light);
+}
+
 .header-desc {
   color: var(--color-text-secondary);
   font-size: 14px;
   margin-left: 38px;
+}
+
+@media (max-width: 640px) {
+  .header-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-title {
+    font-size: 18px;
+  }
+
+  .header-desc {
+    margin-left: 0;
+  }
 }
