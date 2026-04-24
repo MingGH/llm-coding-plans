@@ -62,6 +62,13 @@
   flex-shrink: 0;
 }
 
+.plan-card-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
 .plan-card-name {
   font-size: 15px;
   font-weight: 600;

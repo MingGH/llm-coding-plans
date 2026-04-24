@@ -8,15 +8,17 @@ import ComparePanel from './components/ComparePanel';
 import './App.css';
 
 type Region = 'all' | 'vendor' | 'cloud' | 'international';
+type SortBy = 'default' | 'price-asc' | 'price-desc';
 
 function App() {
   const [search, setSearch] = useState('');
   const [region, setRegion] = useState<Region>('all');
+  const [sortBy, setSortBy] = useState<SortBy>('default');
   const [compareIds, setCompareIds] = useState<string[]>([]);
   const [showCompare, setShowCompare] = useState(false);
 
   const filtered = useMemo(() => {
-    return plans.filter((p) => {
+    const list = plans.filter((p) => {
       const matchRegion = region === 'all' || p.region === region;
       if (!matchRegion) return false;
       if (!search.trim()) return true;
@@ -28,7 +30,10 @@ function App() {
         p.supportedModels.some((m) => m.toLowerCase().includes(q))
       );
     });
-  }, [search, region]);
+    if (sortBy === 'price-asc') return [...list].sort((a, b) => a.priceNum - b.priceNum);
+    if (sortBy === 'price-desc') return [...list].sort((a, b) => b.priceNum - a.priceNum);
+    return list;
+  }, [search, region, sortBy]);
 
   const toggleCompare = (id: string) => {
     setCompareIds((prev) => {
@@ -47,6 +52,15 @@ function App() {
         <div className="toolbar">
           <SearchBar value={search} onChange={setSearch} />
           <RegionTabs value={region} onChange={setRegion} />
+          <select
+            className="sort-select"
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value as SortBy)}
+          >
+            <option value="default">默认排序</option>
+            <option value="price-asc">价格从低到高</option>
+            <option value="price-desc">价格从高到低</option>
+          </select>
         </div>
 
         {compareIds.length > 0 && (

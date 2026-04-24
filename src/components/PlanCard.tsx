@@ -26,12 +26,22 @@ export default function PlanCard({
         {/* 第一行：名称 + 区域标签 */}
         <div className="plan-card-top">
           <div className="plan-card-identity">
-            <div
-              className="plan-card-avatar"
-              style={{ background: plan.color }}
-            >
-              {plan.name.charAt(0)}
-            </div>
+            {plan.icon ? (
+              <img
+                className="plan-card-icon"
+                src={`https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/${plan.icon}.svg`}
+                alt={plan.company}
+                width="24"
+                height="24"
+              />
+            ) : (
+              <div
+                className="plan-card-avatar"
+                style={{ background: plan.color }}
+              >
+                {plan.name.charAt(0)}
+              </div>
+            )}
             <h3 className="plan-card-name">
               {plan.company} - {plan.name}
             </h3>

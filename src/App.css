@@ -19,6 +19,23 @@
   margin-bottom: 24px;
 }
 
+.sort-select {
+  padding: 9px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  outline: none;
+  flex-shrink: 0;
+}
+
+.sort-select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+}
+
 /* ---- Plan Grid ---- */
 .plan-grid {
   display: grid;

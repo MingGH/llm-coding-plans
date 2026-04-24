@@ -9,13 +9,17 @@ export interface CodingPlan {
   id: string;
   name: string;
   company: string;
-  /** vendor = 模型厂商直营, cloud = 云平台转售, international = 国外 */
+  /** vendor = 模型厂商直营, cloud = 云平台转售, international = 国际版 */
   region: 'vendor' | 'cloud' | 'international';
   color: string;
+  /** simple-icons slug, or empty for letter fallback */
+  icon?: string;
   website: string;
   highlight: string;
   supportedModels: string[];
   startingPrice: string;
+  /** 用于排序的数字价格（元/月） */
+  priceNum: number;
   startingPriceNote?: string;
   tiers: PlanTier[];
   updatedAt: string;
@@ -33,6 +37,7 @@ const plans: CodingPlan[] = [
     highlight: '最早推出，支持 Claude Code 等 20+ 编程工具',
     supportedModels: ['GLM-5.1', 'GLM-5-Turbo', 'GLM-5', 'GLM-4.7', 'GLM-4.6', 'GLM-4.5', 'GLM-4.5-Air'],
     startingPrice: '¥49/月',
+    priceNum: 49,
     startingPriceNote: '包季 9 折，包年 8 折',
     tiers: [
       { name: 'Lite', price: '¥49/月', features: ['3x Claude Pro 额度', '适合小型 Repo', '不含 GLM-5'] },
@@ -51,6 +56,7 @@ const plans: CodingPlan[] = [
     highlight: '国际版，美元计价，季付 -10%',
     supportedModels: ['GLM-5.1', 'GLM-5-Turbo', 'GLM-5', 'GLM-4.7', 'GLM-4.6', 'GLM-4.5', 'GLM-4.5-Air'],
     startingPrice: '$18/月',
+    priceNum: 130,
     startingPriceNote: '季付 $16.2/月 (-10%)',
     tiers: [
       { name: 'Lite', price: '$18/月', priceNote: '季付 $16.2/月', features: ['3x Claude Pro 额度', '适合小型 Repo', '支持 20+ 编程工具'] },
@@ -69,6 +75,7 @@ const plans: CodingPlan[] = [
     highlight: '256K 超长上下文，100 Tokens/s 极速响应',
     supportedModels: ['Kimi-K2.6', 'Kimi-K2.5'],
     startingPrice: '¥49/月',
+    priceNum: 49,
     startingPriceNote: '包年最高立省 ¥1,680',
     tiers: [
       { name: 'Andante', price: '¥49/月', features: ['专属 Kimi Code 额度', '旗舰模型抢先体验', '支持多个编程会话'] },
@@ -88,6 +95,7 @@ const plans: CodingPlan[] = [
     highlight: '性价比极高，100 TPS 极速推理，支持多模态',
     supportedModels: ['M2.7', 'M2.7-highspeed'],
     startingPrice: '¥29/月',
+    priceNum: 29,
     startingPriceNote: '包年立省 2 月',
     tiers: [
       { name: 'Starter', price: '¥29/月', features: ['600 次/5h', 'M2.7 约50TPS', '约 1 个 OpenClaw agent'] },
@@ -109,6 +117,7 @@ const plans: CodingPlan[] = [
     highlight: '自研 step-3.5-flash 模型，含语音模型，年付最高立省 ¥1,722',
     supportedModels: ['step-3.5-flash-2603', 'step-3.5-flash', 'stepaudio-2.5'],
     startingPrice: '¥49/月',
+    priceNum: 49,
     startingPriceNote: '支持季付/年付',
     tiers: [
       { name: 'Flash Mini', price: '¥49/月', features: ['100 Prompt/5h (~1500 次模型调用)', '2x OpenAI Go 套餐用量', '多设备登录', 'Agent 多任务并行'] },
@@ -124,10 +133,12 @@ const plans: CodingPlan[] = [
     company: '小米',
     region: 'vendor',
     color: '#f97316',
+    icon: 'xiaomi',
     website: 'https://mimo.mi.com/',
     highlight: '小米自研 MiMo-V2 全系模型，含语音/图像/设计，TTS 限免',
     supportedModels: ['MiMo-V2.5-Pro', 'MiMo-V2.5', 'MiMo-V2.5-TTS-Series'],
     startingPrice: '¥34.32/月',
+    priceNum: 34,
     startingPriceNote: '首购优惠，原价 ¥39/月',
     tiers: [
       { name: 'Lite', price: '¥34.32/月', priceNote: '首购优惠，原价 ¥39', features: ['6000 万 Credits/月', '支持 OpenClaw/Claude Code 等', '非高峰期 0.8x 消耗'] },
@@ -145,10 +156,12 @@ const plans: CodingPlan[] = [
     company: '字节跳动 (火山引擎)',
     region: 'cloud',
     color: '#3b82f6',
+    icon: 'bytedance',
     website: 'https://www.volcengine.com/activity/codingplan',
     highlight: '多厂商模型聚合，支持 Auto 模式自动选模型，目前已售罄',
     supportedModels: ['Doubao-Seed-2.0-Code', 'Doubao-Seed-2.0-Pro', 'Doubao-Seed-2.0-Lite', 'Doubao-Seed-Code', 'MiniMax-M2.7', 'GLM-5.1', 'GLM-4.7', 'DeepSeek-V3.2', 'Kimi-K2.6', 'Kimi-K2.5'],
     startingPrice: '¥40/月',
+    priceNum: 40,
     startingPriceNote: '目前已售罄',
     tiers: [
       { name: 'Lite', price: '¥40/月', priceNote: '已售罄', features: ['数倍于 Claude Pro 用量', '支持自由切换或 Auto 模式', 'Claude Code/Cursor 等工具'] },
@@ -162,10 +175,12 @@ const plans: CodingPlan[] = [
     company: '阿里巴巴 (阿里云)',
     region: 'cloud',
     color: '#f97316',
+    icon: 'alibabacloud',
     website: 'https://www.aliyun.com/benefit/ai/discount',
     highlight: '大厂背书，Token Plan 团队版按席位计费，多用户隔离不降速',
     supportedModels: ['qwen3.6-plus (图片理解)', 'kimi-k2.5 (图片理解)', 'glm-5', 'MiniMax-M2.5', 'qwen3.5-plus', 'qwen3-max-2026-01-23', 'qwen3-coder-next', 'qwen3-coder-plus', 'glm-4.7'],
     startingPrice: '¥198/席/月',
+    priceNum: 198,
     startingPriceNote: '另有 Coding Plan Pro ¥200/月',
     tiers: [
       { name: '标准版', price: '¥198/席/月', features: ['25,000 Credits/月', '多模型灵活切换', '支持文本/视觉/图像生成', '不使用对话数据训练'] },
@@ -181,10 +196,12 @@ const plans: CodingPlan[] = [
     company: '腾讯云',
     region: 'cloud',
     color: '#2563eb',
+    icon: 'tencentqq',
     website: 'https://buy.cloud.tencent.com/hunyuan',
     highlight: '含腾讯混元模型，另有 Token Plan/混元生图/生文/生3D',
     supportedModels: ['Tencent HY 2.0 Instruct', 'GLM-5', 'Kimi-K2.5', 'MiniMax-M2.5'],
     startingPrice: '¥40/月',
+    priceNum: 40,
     tiers: [
       { name: 'Lite', price: '¥40/月', features: ['~1200 次/5h', '~9000 次/周', '~18000 次/月', '适合基础开发任务'] },
       { name: 'Pro', price: '¥200/月', features: ['面向专业开发者', '适合高频高强度编码场景'] },
@@ -197,10 +214,12 @@ const plans: CodingPlan[] = [
     company: '百度智能云',
     region: 'cloud',
     color: '#3b82f6',
+    icon: 'baidu',
     website: 'https://cloud.baidu.com/product/codingplan',
     highlight: '兼容 Claude Code 等主流编程工具，支持 GLM-5/MiniMax-M2.5/Kimi-K2.5',
     supportedModels: ['GLM-5', 'MiniMax-M2.5', 'Kimi-K2.5'],
     startingPrice: '¥40/月',
+    priceNum: 40,
     tiers: [
       { name: 'Lite', price: '¥40/月', features: ['每月最多 18,000 次请求', '适合入门级开发场景', '适配 Claude Code 等 AI 工具'] },
       { name: 'Pro', price: '¥200/月', features: ['每月最多 90,000 次请求', '适合专业开发场景', '适配 Claude Code 等 AI 工具'] },
@@ -217,6 +236,7 @@ const plans: CodingPlan[] = [
     highlight: '每天 10:30 限量秒杀，首购 ¥19.9 起，已售罄可预约',
     supportedModels: ['DeepSeek', 'GLM', 'MiniMax', 'Qwen3-Coder', 'Kimi'],
     startingPrice: '¥19.9/月',
+    priceNum: 20,
     startingPriceNote: '首购价，原价 ¥40/月，已售罄',
     tiers: [
       { name: 'Lite', price: '¥19.9/月', priceNote: '首购价，原价 ¥40', features: ['每月最多 18,000 次请求', '适合轻度开发者', '工具: Claude Code/OpenClaw/Roo Code/Cursor', '已售罄，可预约'] },
@@ -234,6 +254,7 @@ const plans: CodingPlan[] = [
     highlight: '无忧版 ¥3.9 起不限次数，95% 用户选择专业版',
     supportedModels: ['Spark X2', 'GLM-5 (默认)', 'GLM-5.1', 'MiniMax-M2.5', 'KIMI-K2.5', 'DeepSeek-V3.2', 'GLM-4.7-Flash', 'Qwen3.5-35B-A3B', 'Qwen3-Coder-Next-FP8', 'Qwen3.5-397B-A17B'],
     startingPrice: '¥3.90/月',
+    priceNum: 4,
     startingPriceNote: '首购价，原价 ¥19/月',
     tiers: [
       { name: '无忧版', price: '¥3.90/月', priceNote: '首购优惠，原价 ¥19', features: ['请求次数不限', '仅轻量模型 (Qwen3.5-35B-A3B 等)', '首购优惠，后续恢复原价'] },
@@ -252,6 +273,7 @@ const plans: CodingPlan[] = [
     highlight: '支持 Minimax/GLM/DeepSeek/Kimi 等热门模型，暂时售罄',
     supportedModels: ['MiniMax', 'GLM', 'DeepSeek', 'Kimi'],
     startingPrice: '¥40/月',
+    priceNum: 40,
     startingPriceNote: '暂时售罄',
     tiers: [
       { name: 'Infini Coding Lite', price: '¥40/月', priceNote: '暂时售罄', features: ['1000 次请求/5h', '适合入门级开发场景', '适配 Claude Code/Cline 等工具'] },
@@ -269,6 +291,7 @@ const plans: CodingPlan[] = [
     highlight: '仅限 GLM 系列模型，含 GLM-5.1',
     supportedModels: ['GLM-5.1', 'GLM-5-Turbo', 'GLM-4.7', 'GLM-4.6', 'GLM-4.5-Air'],
     startingPrice: '¥49/月',
+    priceNum: 49,
     tiers: [
       { name: 'Lite', price: '¥49/月', features: ['~80 prompts/5h', '~400/周', '~1600/月'] },
       { name: 'Pro', price: '¥149/月', features: ['~400 prompts/5h', '~2000/周', '~8000/月'] },
