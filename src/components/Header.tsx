@@ -41,7 +41,7 @@ export default function Header() {
               rel="noopener noreferrer"
               title="996.ninja"
             >
-              <span style={{ fontSize: '18px' }}>&#x1F977;</span>
+              <span style={{ fontSize: '14px', fontFamily: "'Georgia', serif", letterSpacing: '0.5px' }}>&#x1F977; 996忍者</span>
             </a>
           </div>
         </div>
