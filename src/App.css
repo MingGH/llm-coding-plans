@@ -221,25 +221,51 @@
 
 @media (max-width: 640px) {
   .main {
-    padding: 16px 12px 40px;
+    padding: 12px 10px 40px;
   }
 
   .plan-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .toolbar {
     flex-direction: column;
     align-items: stretch;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .sort-select {
+    width: 100%;
+    font-size: 14px;
+    min-height: 40px;
   }
 
   .compare-bar {
     flex-direction: column;
     align-items: flex-start;
+    padding: 10px 14px;
+    gap: 10px;
   }
 
   .compare-bar-actions {
     width: 100%;
     justify-content: flex-end;
+  }
+
+  .compare-bar-left {
+    gap: 8px;
+  }
+
+  .btn {
+    min-height: 40px;
+    padding: 8px 16px;
+    touch-action: manipulation;
+  }
+
+  .notes-box {
+    padding: 14px 16px;
+    margin-top: 20px;
   }
 }

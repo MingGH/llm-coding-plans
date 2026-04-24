@@ -5,10 +5,18 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 3px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  flex-shrink: 0;
+}
+
+.region-tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .region-tab {
-  padding: 7px 18px;
+  padding: 7px 16px;
   border: none;
   background: transparent;
   border-radius: var(--radius-sm);
@@ -18,6 +26,9 @@
   font-weight: 500;
   transition: all 0.15s ease;
   white-space: nowrap;
+  flex-shrink: 0;
+  min-height: 36px;
+  touch-action: manipulation;
 }
 
 .region-tab:hover {
@@ -28,4 +39,18 @@
 .region-tab.active {
   background: var(--color-primary);
   color: #fff;
+}
+
+@media (max-width: 640px) {
+  .region-tabs {
+    width: 100%;
+  }
+
+  .region-tab {
+    flex: 1;
+    padding: 8px 10px;
+    font-size: 13px;
+    text-align: center;
+    justify-content: center;
+  }
 }
