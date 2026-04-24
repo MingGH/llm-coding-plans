@@ -1,0 +1,31 @@
+.region-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 3px;
+}
+
+.region-tab {
+  padding: 7px 18px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.region-tab:hover {
+  color: var(--color-text);
+  background: var(--color-border-light);
+}
+
+.region-tab.active {
+  background: var(--color-primary);
+  color: #fff;
+}
