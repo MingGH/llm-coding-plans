@@ -41,7 +41,7 @@ export default function Header() {
               rel="noopener noreferrer"
               title="996.ninja"
             >
-              996.ninja
+              <span style={{ fontSize: '18px' }}>&#x1F977;</span>
             </a>
           </div>
         </div>
