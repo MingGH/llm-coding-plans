@@ -1,73 +1,61 @@
-# React + TypeScript + Vite
+# 全网最全国内 Coding Plan 大汇总
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+一站式对比国内全部主流 AI Coding Plan 订阅套餐 -- 价格、模型、额度、购买链接，帮你选出最适合的编程套餐。
 
-Currently, two official plugins are available:
+线上地址：**https://bestcoding.996.ninja**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 覆盖产品
 
-## React Compiler
+### 模型厂商直营
+- 智谱 GLM Coding Plan（国内 / 国际版）
+- Kimi Code Plan（月之暗面）
+- MiniMax Token Plan
+- 阶跃星辰 StepFun Coding Plan
+- 小米 MiMo Token Plan
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 云平台转售
+- 火山方舟 Coding Plan（字节跳动）
+- 阿里百炼 Coding Plan / Token Plan（阿里云）
+- 腾讯云 Coding Plan
+- 百度千帆 Coding Plan
+- 京东云 Coding Plan
+- 讯飞星辰 Coding Plan
+- 无问芯穹 Infini Coding Plan
+- 天翼云 GLM Coding Plan
 
-## Expanding the ESLint configuration
+## 功能
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 按分类筛选：模型厂商 / 云平台 / 国际版
+- 关键词搜索：产品名、公司、模型名
+- 勾选 2-3 个产品并排对比
+- 价格档位直接外露，一眼可见
+- 数据配置化，维护只需编辑 `src/data/plans.ts`
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 技术栈
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- React 19 + TypeScript
+- Vite 8
+- 纯 CSS（无 UI 框架依赖）
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 开发
+
+```bash
+yarn install
+yarn dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 构建
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+yarn build
 ```
+
+构建产物在 `dist/` 目录，可直接部署到任意静态托管。
+
+## 数据更新
+
+编辑 `src/data/plans.ts`，每个产品是一个对象，新增/修改/删除产品只需操作这个文件。
+
+## License
+
+MIT
