@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import plans, { type CodingPlan } from './data/plans';
 import Header from './components/Header';
 import SearchBar from './components/SearchBar';
@@ -10,19 +10,50 @@ import './App.css';
 type Region = 'all' | 'vendor' | 'cloud' | 'international';
 type SortBy = 'default' | 'price-asc' | 'price-desc';
 
+function getInitialParams() {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    q: params.get('q') || '',
+    region: (params.get('region') || 'all') as Region,
+    sort: (params.get('sort') || 'default') as SortBy,
+  };
+}
+
 function App() {
-  const [search, setSearch] = useState('');
-  const [region, setRegion] = useState<Region>('all');
-  const [sortBy, setSortBy] = useState<SortBy>('default');
+  const initial = getInitialParams();
+  const [search, setSearch] = useState(initial.q);
+  const [debouncedSearch, setDebouncedSearch] = useState(initial.q);
+  const [region, setRegion] = useState<Region>(initial.region);
+  const [sortBy, setSortBy] = useState<SortBy>(initial.sort);
   const [compareIds, setCompareIds] = useState<string[]>([]);
   const [showCompare, setShowCompare] = useState(false);
+
+  // Debounce search
+  useEffect(() => {
+    const t = setTimeout(() => setDebouncedSearch(search), 250);
+    return () => clearTimeout(t);
+  }, [search]);
+
+  // Sync state to URL
+  const syncURL = useCallback((q: string, r: Region, s: SortBy) => {
+    const params = new URLSearchParams();
+    if (q) params.set('q', q);
+    if (r !== 'all') params.set('region', r);
+    if (s !== 'default') params.set('sort', s);
+    const str = params.toString();
+    window.history.replaceState(null, '', str ? `?${str}` : window.location.pathname);
+  }, []);
+
+  useEffect(() => {
+    syncURL(debouncedSearch, region, sortBy);
+  }, [debouncedSearch, region, sortBy, syncURL]);
 
   const filtered = useMemo(() => {
     const list = plans.filter((p) => {
       const matchRegion = region === 'all' || p.region === region;
       if (!matchRegion) return false;
-      if (!search.trim()) return true;
-      const q = search.toLowerCase();
+      if (!debouncedSearch.trim()) return true;
+      const q = debouncedSearch.toLowerCase();
       return (
         p.name.toLowerCase().includes(q) ||
         p.company.toLowerCase().includes(q) ||
@@ -33,7 +64,7 @@ function App() {
     if (sortBy === 'price-asc') return [...list].sort((a, b) => a.priceNum - b.priceNum);
     if (sortBy === 'price-desc') return [...list].sort((a, b) => b.priceNum - a.priceNum);
     return list;
-  }, [search, region, sortBy]);
+  }, [debouncedSearch, region, sortBy]);
 
   const toggleCompare = (id: string) => {
     setCompareIds((prev) => {
@@ -97,6 +128,8 @@ function App() {
             </div>
           </div>
         )}
+
+        <div className="plan-count">共 {filtered.length} 个产品</div>
 
         <div className="plan-grid">
           {filtered.map((plan: CodingPlan) => (

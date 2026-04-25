@@ -36,6 +36,13 @@
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
 }
 
+/* ---- Plan Count ---- */
+.plan-count {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin-bottom: 10px;
+}
+
 /* ---- Plan Grid ---- */
 .plan-grid {
   display: grid;

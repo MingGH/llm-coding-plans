@@ -48,7 +48,7 @@
   color: var(--color-text);
 }
 
-/* Table */
+/* ---- Table (desktop) ---- */
 .compare-table-wrap {
   overflow: auto;
   padding: 0 24px 24px;
@@ -133,38 +133,72 @@
   font-size: 12px;
 }
 
-/* Tiers in compare */
+/* ---- Tiers (full features) ---- */
 .compare-tiers {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
 }
 
 .compare-tier {
+  background: var(--color-bg);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+}
+
+.compare-tier-head {
   display: flex;
-  justify-content: space-between;
+  align-items: baseline;
   gap: 8px;
-  font-size: 12px;
-  padding: 3px 0;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
 }
 
 .compare-tier-name {
-  color: var(--color-text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text);
 }
 
 .compare-tier-price {
   font-weight: 600;
   color: var(--color-primary);
+  font-size: 13px;
   white-space: nowrap;
 }
 
-.compare-tier-feat {
+.compare-tier-note {
   font-size: 11px;
-  color: var(--color-text-muted);
-  grid-column: 1 / -1;
+  color: #ea580c;
+  font-weight: 500;
 }
 
-/* Tags in compare */
+.compare-tier-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.compare-tier-features li {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  padding: 1px 0 1px 12px;
+  position: relative;
+  line-height: 1.6;
+}
+
+.compare-tier-features li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-border);
+}
+
+/* ---- Tags ---- */
 .compare-tag-list {
   display: flex;
   flex-wrap: wrap;
@@ -189,7 +223,12 @@
   text-decoration: underline;
 }
 
-/* Responsive */
+/* ---- Mobile cards (hidden on desktop) ---- */
+.compare-cards {
+  display: none;
+}
+
+/* ---- Responsive ---- */
 @media (max-width: 640px) {
   .compare-overlay {
     padding: 0;
@@ -209,47 +248,51 @@
     font-size: 16px;
   }
 
+  /* Hide table on mobile */
   .compare-table-wrap {
-    padding: 0 0 20px;
-    /* 横向滚动，左侧标签列固定 */
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    display: none;
   }
 
-  .compare-table {
-    min-width: 480px;
+  /* Show stacked cards on mobile */
+  .compare-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    overflow-y: auto;
   }
 
-  .compare-table th,
-  .compare-table td {
-    padding: 10px 12px;
+  .compare-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .compare-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    border-left: 4px solid;
+    background: var(--color-bg);
+  }
+
+  .compare-card-row {
+    padding: 10px 14px;
+    border-top: 1px solid var(--color-border-light);
+  }
+
+  .compare-card-label {
     font-size: 12px;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    margin-bottom: 4px;
   }
 
-  .compare-label-col {
-    width: 72px;
-    position: sticky;
-    left: 0;
-    background: var(--color-surface);
-    z-index: 1;
-    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.04);
-  }
-
-  .compare-label {
-    position: sticky;
-    left: 0;
-    background: var(--color-surface);
-    z-index: 1;
-    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.04);
-    font-size: 12px;
-  }
-
-  .compare-product-col {
-    min-width: 140px;
-  }
-
-  .compare-product-name {
+  .compare-card-value {
     font-size: 13px;
+    color: var(--color-text);
+    line-height: 1.6;
   }
 
   .compare-avatar {
@@ -258,12 +301,7 @@
     font-size: 13px;
   }
 
-  .compare-tier {
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .compare-tier-price {
+  .compare-product-name {
     font-size: 13px;
   }
 }
