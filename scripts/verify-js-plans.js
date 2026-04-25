@@ -10,9 +10,6 @@
 
 const { chromium } = require('playwright');
 
-const CHROME_PATH =
-  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-
 // 需要 JS 渲染的页面
 const targets = [
   {
@@ -72,7 +69,6 @@ const targets = [
   console.log('='.repeat(70) + '\n');
 
   const browser = await chromium.launch({
-    executablePath: CHROME_PATH,
     headless: true,
     args: ['--no-sandbox', '--disable-setuid-sandbox'],
   });
