@@ -61,6 +61,13 @@ const targets = [
     waitFor: 'text=Coding',
     priceKeywords: ['49', '149', '469', 'Lite', 'Pro', 'Max', 'GLM'],
   },
+  {
+    id: 'cucloud-coding',
+    name: '联通云 Coding Plan',
+    url: 'https://www.cucloud.cn/Product/CodingPlan.html',
+    waitFor: 'text=产品规格',
+    priceKeywords: ['40', '200', 'Lite', 'Pro', '18000', '90000', 'Coding'],
+  },
 ];
 
 (async () => {

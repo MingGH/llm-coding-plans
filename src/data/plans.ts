@@ -299,6 +299,23 @@ const plans: CodingPlan[] = [
     ],
     updatedAt: '2026-04',
   },
+  {
+    id: 'cucloud-coding',
+    name: '联通云 Coding Plan',
+    company: '中国联通 (联通云)',
+    region: 'cloud',
+    color: '#c8102e',
+    website: 'https://www.cucloud.cn/Product/CodingPlan.html',
+    highlight: 'AI场景专属订阅套餐，模型自由、工具自由，每日限量供应',
+    supportedModels: ['5+X 款模型（页面未列明细）'],
+    startingPrice: '¥40/月',
+    priceNum: 40,
+    tiers: [
+      { name: 'Lite', price: '¥40/月', features: ['每月最多 18,000 次请求', '适用轻量开发场景', '支持主流 AI 编程工具'] },
+      { name: 'Pro', price: '¥200/月', features: ['每月最多 90,000 次请求', '适用复杂项目开发场景', '支持主流 AI 编程工具'] },
+    ],
+    updatedAt: '2026-04',
+  },
 ];
 
 export default plans;
